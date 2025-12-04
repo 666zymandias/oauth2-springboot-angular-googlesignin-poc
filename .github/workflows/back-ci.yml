@@ -34,7 +34,7 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
-    - name: Give execution permission to Maven Wrapper
+      - name: Give execution permission to Maven Wrapper
         working-directory: resource-server
         run: chmod +x mvnw
 
