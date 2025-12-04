@@ -1,0 +1,45 @@
+name: Check PRs older than 2 hours
+
+on:
+  schedule:
+    - cron: "*/60 * * * *"   # Cada hora
+  workflow_dispatch:
+
+jobs:
+  check-prs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener PRs abiertas
+        id: prlist
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+            });
+            return prs.data;
+
+      - name: Comprobar PRs mayores de 2 horas
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prs = ${{ steps.prlist.outputs.result ? steps.prlist.outputs.result : [] }};
+            const twoHours = 2 * 60 * 60 * 1000;
+            const now = new Date();
+
+            if (prs.length === 0) {
+              core.info("No hay PRs abiertas);
+              return;
+            }
+
+            prs.forEach(pr => {
+              const created = new Date(pr.created_at);
+              const diff = now - created;
+
+              if (diff > twoHours) {
+                core.warning(`La PR #${pr.number} (${pr.title}) lleva abierta más de 2 horas!`);
+              }
+            });
