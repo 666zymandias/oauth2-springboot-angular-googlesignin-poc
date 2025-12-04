@@ -7,9 +7,8 @@ on:
     branches: ["develop"]
 
 jobs:
-  frontend:
+  ag-prueba-front:
     runs-on: ubuntu-latest
-    needs: [authorization-server, resource-server]
     steps:
       - uses: actions/checkout@v4
 
