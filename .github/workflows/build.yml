@@ -1,4 +1,4 @@
-name: CI - Build backend
+name: CI - Build app CD
 
 on:
   push:
