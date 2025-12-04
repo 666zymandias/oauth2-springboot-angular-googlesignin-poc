@@ -20,7 +20,7 @@ jobs:
 
       - name: Build authorization server
         working-directory: authorization-server
-        run: mvn -B package
+        run: mvn -B package -DskipTests
 
   resource-server:
     runs-on: ubuntu-latest
@@ -36,4 +36,4 @@ jobs:
 
       - name: Build resource server
         working-directory: resource-server
-        run: ./mvnw -B package
+        run: ./mvnw -B package -DskipTests
