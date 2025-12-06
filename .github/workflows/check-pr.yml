@@ -1,8 +1,6 @@
 name: Check PRs older than 2 hours
 
 on:
-  schedule:
-    - cron: "*/60 * * * *"   # Cada hora
   workflow_dispatch:
 
 jobs:
