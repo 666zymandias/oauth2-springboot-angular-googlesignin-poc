@@ -17,6 +17,7 @@ Este proyecto de prueba demuestra la implementación de autenticación y autoriz
 - Pantalla de consentimiento de permisos de Google.
 - Persistencia en una base de datos MySQL.
 
+
 ## Requisitos
 
 - Java 17 o superior.
