@@ -1,12 +1,12 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { TokenService } from '../services/token.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class ResourceInterceptor implements HttpInterceptor {
+  private tokenService = inject(TokenService);
 
-  constructor(private tokenService: TokenService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let intReq = request;

@@ -11,8 +11,6 @@ const CODE_VERIFIER= 'code_verifier';
 })
 export class TokenService {
 
-  constructor() { }
-
   setTokens(access_token: string, refresh_token: string): void {
     localStorage.removeItem(ACCESS_TOKEN);
     localStorage.setItem(ACCESS_TOKEN, access_token);

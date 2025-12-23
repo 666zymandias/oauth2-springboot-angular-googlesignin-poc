@@ -1,5 +1,5 @@
 import { AuthService } from './../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
 
@@ -9,16 +9,13 @@ import { TokenService } from '../../services/token.service';
   styleUrl: './authorized.component.scss'
 })
 export class AuthorizedComponent implements OnInit {
+  private activatedRoute = inject(ActivatedRoute);
+  private authService = inject(AuthService);
+  private tokenService = inject(TokenService);
+  private router = inject(Router);
+
 
   code = '';
-
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private authService: AuthService,
-    private tokenService: TokenService,
-    private router: Router
-  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(data => {

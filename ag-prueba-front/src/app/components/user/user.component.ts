@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ResourceService } from '../../services/resource.service';
 
 @Component({
@@ -9,12 +9,10 @@ import { ResourceService } from '../../services/resource.service';
   styleUrl: './user.component.scss'
 })
 export class UserComponent implements OnInit {
+  private resourceService = inject(ResourceService);
+
 
   message = '';
-
-  constructor(
-    private resourceService: ResourceService
-  ) { }
 
   ngOnInit(): void {
     this.resourceService.user().subscribe(data => {

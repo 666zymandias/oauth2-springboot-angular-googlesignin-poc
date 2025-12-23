@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  private httpClient = inject(HttpClient);
+
 
   token_url = environment.token_url;
 
-  constructor(private httpClient: HttpClient) { }
-
-  public getToken(code: string, codeVerifier: string): Observable<any> {
-    let body = new URLSearchParams();
+  public getToken(code: string, codeVerifier: string): Observable<unknown> {
+    const body = new URLSearchParams();
     body.set('grant_type', environment.grant_type);
     body.set('client_id', environment.client_id);
     body.set('redirect_uri', environment.redirect_uri);
@@ -27,7 +27,7 @@ export class AuthService {
       'Authorization': basic_auth
     });
     const httpOptions = { headers: headers_object};
-    return this.httpClient.post<any>(this.token_url, body, httpOptions);
+    return this.httpClient.post<unknown>(this.token_url, body, httpOptions);
   }
 
 }

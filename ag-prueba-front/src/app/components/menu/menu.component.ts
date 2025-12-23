@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpParams } from '@angular/common/http';
 import { TokenService } from '../../services/token.service';
@@ -13,6 +13,8 @@ const CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent implements OnInit {
+  private tokenService = inject(TokenService);
+
   
   authorize_uri = environment.authorized_uri;
   logout_uri = environment.logout_url;
@@ -21,7 +23,7 @@ export class MenuComponent implements OnInit {
   isAdmin: boolean | undefined;
 
 
-  params: any =  {
+  params: unknown =  {
     client_id: environment.client_id,
     redirect_uri: environment.redirect_uri,
     scope: environment.scope,
@@ -30,17 +32,12 @@ export class MenuComponent implements OnInit {
     code_challenge_method: environment.code_challenge_method,
   }
 
-  constructor(
-    private tokenService: TokenService
-  ) {  }
-
-  ngOnInit(): void {
-  }
-
   onLogin(): void {
     const codeVerifier = this.generateCodeVerifier();
     this.tokenService.setVerifier(codeVerifier);
+     
     this.params.code_challenge = this.generateCodeChallenge(codeVerifier);
+     
     const httpParams = new HttpParams({fromObject: this.params});
     const codeUrl = this.authorize_uri + httpParams.toString();
     location.href = codeUrl;
@@ -56,7 +53,7 @@ export class MenuComponent implements OnInit {
   }
 
   generateCodeVerifier(): string {
-    let result = customAlphabet(CHARACTERS, 48).toString();
+    const result = customAlphabet(CHARACTERS, 48).toString();
     return result;
   }
 
