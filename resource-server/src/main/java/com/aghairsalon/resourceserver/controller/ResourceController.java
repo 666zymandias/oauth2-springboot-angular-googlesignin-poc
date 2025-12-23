@@ -1,10 +1,7 @@
 package com.aghairsalon.resourceserver.controller;
 
 import com.aghairsalon.resourceserver.dto.MessageDTO;
-import com.aghairsalon.resourceserver.dto.PruebaRsrcDTO;
-import com.aghairsalon.resourceserver.model.PruebaRsrc;
 import com.aghairsalon.resourceserver.services.PruebaRsrcService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
