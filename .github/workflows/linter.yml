@@ -25,6 +25,9 @@ jobs:
         cache: maven
 
     - name: Ejecutar Checkstyle y Tests
+      env:
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
       run: mvn clean verify checkstyle:check
 
   resource-server-analysis:
@@ -45,6 +48,9 @@ jobs:
         cache: maven
 
     - name: Ejecutar Checkstyle y Tests
+      env:
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
       run: mvn clean verify checkstyle:check
 
   frontend-analysis:
