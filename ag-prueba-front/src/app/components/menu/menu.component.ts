@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpParams } from '@angular/common/http';
 import { TokenService } from '../../services/token.service';
@@ -12,7 +12,7 @@ const CHARACTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
   private tokenService = inject(TokenService);
 
   
@@ -22,8 +22,8 @@ export class MenuComponent implements OnInit {
   isLogged: boolean | undefined;
   isAdmin: boolean | undefined;
 
-
-  params: unknown =  {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params: any =  {
     client_id: environment.client_id,
     redirect_uri: environment.redirect_uri,
     scope: environment.scope,

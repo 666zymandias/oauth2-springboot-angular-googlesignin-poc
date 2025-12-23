@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceService.user().subscribe(data => {
-      this.message = data.message;
+      this.message = (data as any).message;
     },
       err => {
         console.log(err);

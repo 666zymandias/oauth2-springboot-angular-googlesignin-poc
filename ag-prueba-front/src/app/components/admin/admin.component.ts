@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceService.admin().subscribe(data => {
-      this.message = data.message;
+      this.message = (data as any).message;
     },
       err => {
         console.log(err);

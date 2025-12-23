@@ -29,7 +29,8 @@ export class AuthorizedComponent implements OnInit {
   getToken(code: string, codeVerifier: string): void {
     this.authService.getToken(code, codeVerifier).subscribe(
       data => {
-        this.tokenService.setTokens(data.access_token, data.refresh_token);
+        const response = data as any;
+        this.tokenService.setTokens(response.access_token, response.refresh_token);
         this.router.navigate(['']);
       },
       err => {
