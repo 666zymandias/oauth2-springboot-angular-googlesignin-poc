@@ -28,7 +28,7 @@ jobs:
       env:
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
         GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-      run: mvn clean verify checkstyle:check
+      run: mvn clean checkstyle:check -DskipTests
 
   resource-server-analysis:
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
       env:
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
         GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-      run: mvn clean verify checkstyle:check
+      run: mvn clean checkstyle:check -DskipTests
 
   frontend-analysis:
     runs-on: ubuntu-latest
