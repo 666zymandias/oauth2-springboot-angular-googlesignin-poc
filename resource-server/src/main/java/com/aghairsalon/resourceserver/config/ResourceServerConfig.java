@@ -21,21 +21,18 @@ public class ResourceServerConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.cors(Customizer.withDefaults());
-        return http
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                .oauth2ResourceServer(oauth2 -> oauth2
-                    // CAMBIO CLAVE: Usamos 'withDefaults()'
-                    // Esto le dice a Spring: "Busca un Bean de tipo JwtDecoder y úsalo"
-                    // También buscará automáticamente tu bean JwtAuthenticationConverter
-                    .jwt(Customizer.withDefaults()) 
-                )
-                .build();
+        http
+            .authorizeHttpRequests(authorize -> authorize
+                // PERMITIMOS QUE CUALQUIERA VEA LAS MÉTRICAS (SOLO PARA LA POC)
+                .requestMatchers("/actuator/**").permitAll() // <--- AÑADE ESTA LÍNEA AQUÍ
+                // El resto sigue protegido
+                .anyRequest().authenticated()
+            )
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+            
+        return http.build();
     }
 
-    // NUEVO BEAN: Extraemos la lógica de conexión aquí.
-    // Al ser un Bean independiente, el @MockBean del test lo sustituirá y 
-    // esta línea NUNCA se ejecutará durante el test.
     @Bean
     public JwtDecoder jwtDecoder() {
         return JwtDecoders.fromOidcIssuerLocation(issuerUri);
