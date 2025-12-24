@@ -9,19 +9,21 @@ import { ResourceService } from '../../services/resource.service';
   styleUrl: './user.component.scss'
 })
 export class UserComponent implements OnInit {
-  private resourceService = inject(ResourceService);
+  private readonly resourceService = inject(ResourceService);
 
 
   message = '';
 
   ngOnInit(): void {
-    this.resourceService.user().subscribe(data => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.message = (data as any).message;
-    },
-      err => {
+    this.resourceService.user().subscribe({
+      next: (data) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.message = (data as any).message;
+      },
+      error: (err) => {
         console.log(err);
-      });
+      }
+    });
   }
 
 }

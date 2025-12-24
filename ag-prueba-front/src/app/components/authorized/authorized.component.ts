@@ -9,10 +9,10 @@ import { TokenService } from '../../services/token.service';
   styleUrl: './authorized.component.scss'
 })
 export class AuthorizedComponent implements OnInit {
-  private activatedRoute = inject(ActivatedRoute);
-  private authService = inject(AuthService);
-  private tokenService = inject(TokenService);
-  private router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly authService = inject(AuthService);
+  private readonly tokenService = inject(TokenService);
+  private readonly router = inject(Router);
 
 
   code = '';
@@ -27,16 +27,17 @@ export class AuthorizedComponent implements OnInit {
   }
 
   getToken(code: string, codeVerifier: string): void {
-    this.authService.getToken(code, codeVerifier).subscribe(
-      data => {
+    this.authService.getToken(code, codeVerifier).subscribe({
+      next: (data) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const response = data as any;
         this.tokenService.setTokens(response.access_token, response.refresh_token);
         this.router.navigate(['']);
       },
-      err => {
+      error: (err) => {
         console.log(err);
-      })
+      }
+    });
   }
 
 }

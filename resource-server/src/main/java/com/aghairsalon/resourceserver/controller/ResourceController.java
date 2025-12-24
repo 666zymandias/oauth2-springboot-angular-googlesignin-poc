@@ -38,14 +38,4 @@ public class ResourceController {
         return ResponseEntity.ok(pruebaRsrcService.findAll());
     }
 
-//    @GetMapping("/prueba")
-//    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'OIDC_USER')")
-//    public ResponseEntity<List<PruebaRsrcDTO>> findAll() {
-//        List<PruebaRsrcDTO> aux = new ArrayList<>();
-//        pruebaRsrcService.findAll().forEach(e -> {
-//            new PruebaRsrcDTO();
-//        });
-//        return ResponseEntity.ok(pruebaRsrcService.findAll());
-//    }
-
 }
