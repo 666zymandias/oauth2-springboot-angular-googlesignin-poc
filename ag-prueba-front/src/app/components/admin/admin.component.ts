@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceService.admin().subscribe(data => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.message = (data as any).message;
     },
       err => {

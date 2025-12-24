@@ -29,6 +29,7 @@ export class AuthorizedComponent implements OnInit {
   getToken(code: string, codeVerifier: string): void {
     this.authService.getToken(code, codeVerifier).subscribe(
       data => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const response = data as any;
         this.tokenService.setTokens(response.access_token, response.refresh_token);
         this.router.navigate(['']);

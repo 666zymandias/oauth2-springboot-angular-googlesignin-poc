@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceService.user().subscribe(data => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.message = (data as any).message;
     },
       err => {
